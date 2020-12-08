@@ -9,10 +9,14 @@ on:
 jobs:
 
   build:
-
+    args:
+      - JAVA_VERSION=openjdk11
+      - JMETER_VERSION=apache-jmeter-5.3
+      - JMETER_URL=https://downloads.apache.org//jmeter/binaries/
+      - TEST_FILE=scripts/tst.jmx
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag bbuzens/jmeter:$(date +%s)
+      run: docker build . --file Dockerfile --tag bbuzens/jmeter:$JMETER_VERSION_$JAVA_VERSION --tag bbuzens/jmeter:latest
